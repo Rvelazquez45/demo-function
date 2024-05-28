@@ -30,7 +30,8 @@ public class Demo
     {
         _logger.LogInformation(message: "C# HTTP trigger function processed a request.");
 
-       PersonModel? data = await req.ReadFromJsonAsync<PersonModel>();
+       PersonModel? data = await 
+            req.ReadFromJsonAsync<PersonModel>();
 
         if 
         (
@@ -41,7 +42,10 @@ public class Demo
         {
             _logger.LogError(message: "Invalid JSON object in the request body.");
 
-            return new BadRequestObjectResult(error: "Please provide a valid JSON object in the request body.");
+            return new BadRequestObjectResult
+            (
+                error: "Please provide a valid JSON object in the request body."
+            );
         }
 
         #region notes
@@ -52,7 +56,8 @@ public class Demo
         #endregion notes
 
         string? connectionString = _config.GetConnectionString(name: "Default");
+        string? test = _config.GetValue<string>(key: "Test:Test1");
 
-        return new OkObjectResult(value: connectionString);
+        return new OkObjectResult(value: connectionString + " " + test);
     }
 }
