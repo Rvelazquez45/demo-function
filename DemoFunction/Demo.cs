@@ -17,12 +17,12 @@ public class Demo
     [Function("Demo")]
     public IActionResult Run
     (
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] 
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post")] 
         HttpRequest req
     )
     {
-        _logger.LogInformation("C# HTTP trigger function processed a request.");
+        _logger.LogInformation(message: "C# HTTP trigger function processed a request.");
 
-        return new OkObjectResult(null);
+        return new OkObjectResult(value: "Hello World!");
     }
 }
